@@ -144,7 +144,7 @@ function getBook(id) {
 }
 
 // Destructuring Object & Array
-const book = getBook(1);
+const book = getBook(2);
 book;
 
 // Destructuring Object
@@ -192,3 +192,31 @@ console.log(summary);
 // Ternary Operator
 const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
 console.log(`The book has ${pagesRange} pages`);
+
+// Short-circuit & Logical Operator
+// Short-circuit for && logical operator
+console.log(true && "Some string");
+console.log(false && "Some string");
+console.log(hasMovieAdaptation && "This book has a movie");
+
+// falsy: 0, '', null, undefined, false
+console.log("jonas" && "Some string");
+console.log(0 && "Some string");
+
+// Short-circuit for || logical operator
+// The inverse of the logical short circuit && operator.
+console.log(true || "Some string");
+console.log(false || "Some string");
+
+// More example
+console.log(book.translations.spanish);
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+spanishTranslation;
+
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || "no data";
+// countWrong;
+
+// Nullish Coalescing Operator
+const count = book.reviews.librarything.reviewsCount ?? "no data";
+count;
