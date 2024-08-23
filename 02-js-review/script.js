@@ -139,89 +139,105 @@ function getBooks() {
   return data;
 }
 
-function getBook(id) {
-  return data.find((d) => d.id === id);
-}
-
-// Destructuring Object & Array
-const book = getBook(3);
-book;
-
-// Destructuring Object
-// const title = book.title; ======= BAD
-const { title, author, genres, pages, publicationDate, hasMovieAdaptation } =
-  book;
-console.log(title, author, genres);
-
-// Destructuring Array
-// const primaryGenres = genres[0]; ======= BAD
-const [scienceFiction, humor, speculativeFiction] = genres;
-console.log(scienceFiction);
-
-// ============================================
-// Rest & Spread Operator
-// Rest
-const [primaryGenre, secondaryGenre, ...otherGenre] = genres;
-console.log(primaryGenre, secondaryGenre, otherGenre);
-
-// Spread
-const newGenres = [...genres, "romance"];
-console.log(newGenres);
-
-const updatedBook = {
-  ...book,
-  hasMovieAdaptation: true, // Adding a new property
-  moviePublicationDate: "09-09-2004", // Overwriting an existing property
-};
-console.log(updatedBook);
-
-// Arrow Function
-const getYear = (str) => str.split("-")[0];
-// function getYear(str) {
-//   return str.split("-")[0];
+// function getBook(id) {
+//   return data.find((d) => d.id === id);
 // }
 
-// Template Literals
-const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${getYear(
-  publicationDate
-)}. The book has ${hasMovieAdaptation ? "" : "not "}been adapted as movies`;
-console.log(hasMovieAdaptation);
+// // Destructuring Object & Array
+// const book = getBook(3);
+// book;
 
-console.log(summary);
+// // Destructuring Object
+// // const title = book.title; ======= BAD
+// const { title, author, genres, pages, publicationDate, hasMovieAdaptation } =
+//   book;
+// console.log(title, author, genres);
 
-// Ternary Operator
-const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
-console.log(`The book has ${pagesRange} pages`);
+// // Destructuring Array
+// // const primaryGenres = genres[0]; ======= BAD
+// const [scienceFiction, humor, speculativeFiction] = genres;
+// console.log(scienceFiction);
 
-// Short-circuit & Logical Operator
-// Short-circuit for && logical operator
-console.log(true && "Some string");
-console.log(false && "Some string");
-console.log(hasMovieAdaptation && "This book has a movie");
+// // ============================================
+// // Rest & Spread Operator
+// // Rest
+// const [primaryGenre, secondaryGenre, ...otherGenre] = genres;
+// console.log(primaryGenre, secondaryGenre, otherGenre);
 
-// falsy: 0, '', null, undefined, false
-console.log("jonas" && "Some string");
-console.log(0 && "Some string");
+// // Spread
+// const newGenres = [...genres, "romance"];
+// console.log(newGenres);
 
-// Short-circuit for || logical operator
-// The inverse of the logical short circuit && operator.
-console.log(true || "Some string");
-console.log(false || "Some string");
+// const updatedBook = {
+//   ...book,
+//   hasMovieAdaptation: true, // Adding a new property
+//   moviePublicationDate: "09-09-2004", // Overwriting an existing property
+// };
+// console.log(updatedBook);
 
-// More example
-console.log(book.translations.spanish);
-const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
-spanishTranslation;
+// // Arrow Function
+// const getYear = (str) => str.split("-")[0];
+// // function getYear(str) {
+// //   return str.split("-")[0];
+// // }
 
-// console.log(book.reviews.librarything.reviewsCount);
-// const countWrong = book.reviews.librarything.reviewsCount || "no data";
-// countWrong;
+// // Template Literals
+// const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${getYear(
+//   publicationDate
+// )}. The book has ${hasMovieAdaptation ? "" : "not "}been adapted as movies`;
+// console.log(hasMovieAdaptation);
 
-// Nullish Coalescing Operator
-// const count = book.reviews.librarything.reviewsCount ?? "no data";
-// count;
+// console.log(summary);
 
-// Optional Chaining Operator
+// // Ternary Operator
+// const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+// console.log(`The book has ${pagesRange} pages`);
+
+// // Short-circuit & Logical Operator
+// // Short-circuit for && logical operator
+// console.log(true && "Some string");
+// console.log(false && "Some string");
+// console.log(hasMovieAdaptation && "This book has a movie");
+
+// // falsy: 0, '', null, undefined, false
+// console.log("jonas" && "Some string");
+// console.log(0 && "Some string");
+
+// // Short-circuit for || logical operator
+// // The inverse of the logical short circuit && operator.
+// console.log(true || "Some string");
+// console.log(false || "Some string");
+
+// // More example
+// console.log(book.translations.spanish);
+// const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+// spanishTranslation;
+
+// // console.log(book.reviews.librarything.reviewsCount);
+// // const countWrong = book.reviews.librarything.reviewsCount || "no data";
+// // countWrong;
+
+// // Nullish Coalescing Operator
+// // const count = book.reviews.librarything.reviewsCount ?? "no data";
+// // count;
+
+// // Optional Chaining Operator
+// function getTotalReviewCount(book) {
+//   const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+//   console.log(librarything);
+
+//   return goodreads + librarything;
+// }
+// console.log(getTotalReviewCount(book));
+
+// Map
+const books = getBooks();
+books;
+
+const titles = books.map(({ title }) => title);
+titles;
+
 function getTotalReviewCount(book) {
   const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
@@ -229,4 +245,11 @@ function getTotalReviewCount(book) {
 
   return goodreads + librarything;
 }
-console.log(getTotalReviewCount(book));
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+
+essentialData;
