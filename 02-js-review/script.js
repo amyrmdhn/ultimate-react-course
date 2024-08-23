@@ -144,7 +144,7 @@ function getBook(id) {
 }
 
 // Destructuring Object & Array
-const book = getBook(2);
+const book = getBook(3);
 book;
 
 // Destructuring Object
@@ -218,5 +218,15 @@ spanishTranslation;
 // countWrong;
 
 // Nullish Coalescing Operator
-const count = book.reviews.librarything.reviewsCount ?? "no data";
-count;
+// const count = book.reviews.librarything.reviewsCount ?? "no data";
+// count;
+
+// Optional Chaining Operator
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  console.log(librarything);
+
+  return goodreads + librarything;
+}
+console.log(getTotalReviewCount(book));
