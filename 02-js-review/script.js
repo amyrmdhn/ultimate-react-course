@@ -149,7 +149,7 @@ book;
 
 // Destructuring Object
 // const title = book.title; ======= BAD
-const { title, author, genres } = book;
+const { title, author, genres, pages, publicationDate } = book;
 console.log(title, author, genres);
 
 // Destructuring Array
@@ -173,3 +173,9 @@ const updatedBook = {
   moviePublicationDate: "09-09-2004", // Overwriting an existing property
 };
 console.log(updatedBook);
+
+// Template Literals
+const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${
+  publicationDate.split("-")[0]
+}`;
+console.log(summary);
