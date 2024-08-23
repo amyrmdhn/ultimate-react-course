@@ -156,3 +156,20 @@ console.log(title, author, genres);
 // const primaryGenres = genres[0]; ======= BAD
 const [scienceFiction, humor, speculativeFiction] = genres;
 console.log(scienceFiction);
+
+// ============================================
+// Rest & Spread Operator
+// Rest
+const [primaryGenre, secondaryGenre, ...otherGenre] = genres;
+console.log(primaryGenre, secondaryGenre, otherGenre);
+
+// Spread
+const newGenres = [...genres, "romance"];
+console.log(newGenres);
+
+const updatedBook = {
+  ...book,
+  hasMovieAdaptation: true, // Adding a new property
+  moviePublicationDate: "09-09-2004", // Overwriting an existing property
+};
+console.log(updatedBook);
