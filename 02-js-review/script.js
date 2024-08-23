@@ -144,12 +144,13 @@ function getBook(id) {
 }
 
 // Destructuring Object & Array
-const book = getBook(2);
+const book = getBook(1);
 book;
 
 // Destructuring Object
 // const title = book.title; ======= BAD
-const { title, author, genres, pages, publicationDate } = book;
+const { title, author, genres, pages, publicationDate, hasMovieAdaptation } =
+  book;
 console.log(title, author, genres);
 
 // Destructuring Array
@@ -177,5 +178,11 @@ console.log(updatedBook);
 // Template Literals
 const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${
   publicationDate.split("-")[0]
-}`;
+}. The book has ${hasMovieAdaptation ? "" : "not "}been adapted as movies`;
+console.log(hasMovieAdaptation);
+
 console.log(summary);
+
+// Ternary Operator
+const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+console.log(`The book has ${pagesRange} pages`);
