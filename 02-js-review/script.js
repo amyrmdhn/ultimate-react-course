@@ -139,97 +139,97 @@ function getBooks() {
   return data;
 }
 
-// function getBook(id) {
-//   return data.find((d) => d.id === id);
+function getBook(id) {
+  return data.find((d) => d.id === id);
+}
+
+// Destructuring Object & Array
+const book = getBook(3);
+book;
+
+// Destructuring Object
+// const title = book.title; ======= BAD
+const { title, author, genres, pages, publicationDate, hasMovieAdaptation } =
+  book;
+console.log(title, author, genres);
+
+// Destructuring Array
+// const primaryGenres = genres[0]; ======= BAD
+const [scienceFiction, humor, speculativeFiction] = genres;
+console.log(scienceFiction);
+
+// ============================================
+// Rest & Spread Operator
+// Rest
+const [primaryGenre, secondaryGenre, ...otherGenre] = genres;
+console.log(primaryGenre, secondaryGenre, otherGenre);
+
+// Spread
+const newGenres = [...genres, "romance"];
+console.log(newGenres);
+
+const updatedBook = {
+  ...book,
+  hasMovieAdaptation: true, // Adding a new property
+  moviePublicationDate: "09-09-2004", // Overwriting an existing property
+};
+console.log(updatedBook);
+
+// Arrow Function
+const getYear = (str) => str.split("-")[0];
+// function getYear(str) {
+//   return str.split("-")[0];
 // }
 
-// // Destructuring Object & Array
-// const book = getBook(3);
-// book;
+// Template Literals
+const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${getYear(
+  publicationDate
+)}. The book has ${hasMovieAdaptation ? "" : "not "}been adapted as movies`;
+console.log(hasMovieAdaptation);
 
-// // Destructuring Object
-// // const title = book.title; ======= BAD
-// const { title, author, genres, pages, publicationDate, hasMovieAdaptation } =
-//   book;
-// console.log(title, author, genres);
+console.log(summary);
 
-// // Destructuring Array
-// // const primaryGenres = genres[0]; ======= BAD
-// const [scienceFiction, humor, speculativeFiction] = genres;
-// console.log(scienceFiction);
+// Ternary Operator
+const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+console.log(`The book has ${pagesRange} pages`);
 
-// // ============================================
-// // Rest & Spread Operator
-// // Rest
-// const [primaryGenre, secondaryGenre, ...otherGenre] = genres;
-// console.log(primaryGenre, secondaryGenre, otherGenre);
+// Short-circuit & Logical Operator
+// Short-circuit for && logical operator
+console.log(true && "Some string");
+console.log(false && "Some string");
+console.log(hasMovieAdaptation && "This book has a movie");
 
-// // Spread
-// const newGenres = [...genres, "romance"];
-// console.log(newGenres);
+// falsy: 0, '', null, undefined, false
+console.log("jonas" && "Some string");
+console.log(0 && "Some string");
 
-// const updatedBook = {
-//   ...book,
-//   hasMovieAdaptation: true, // Adding a new property
-//   moviePublicationDate: "09-09-2004", // Overwriting an existing property
-// };
-// console.log(updatedBook);
+// Short-circuit for || logical operator
+// The inverse of the logical short circuit && operator.
+console.log(true || "Some string");
+console.log(false || "Some string");
 
-// // Arrow Function
-// const getYear = (str) => str.split("-")[0];
-// // function getYear(str) {
-// //   return str.split("-")[0];
-// // }
+// More example
+console.log(book.translations.spanish);
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+spanishTranslation;
 
-// // Template Literals
-// const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${getYear(
-//   publicationDate
-// )}. The book has ${hasMovieAdaptation ? "" : "not "}been adapted as movies`;
-// console.log(hasMovieAdaptation);
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || "no data";
+// countWrong;
 
-// console.log(summary);
+// Nullish Coalescing Operator
+// const count = book.reviews.librarything.reviewsCount ?? "no data";
+// count;
 
-// // Ternary Operator
-// const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
-// console.log(`The book has ${pagesRange} pages`);
+// Optional Chaining Operator
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  console.log(librarything);
 
-// // Short-circuit & Logical Operator
-// // Short-circuit for && logical operator
-// console.log(true && "Some string");
-// console.log(false && "Some string");
-// console.log(hasMovieAdaptation && "This book has a movie");
-
-// // falsy: 0, '', null, undefined, false
-// console.log("jonas" && "Some string");
-// console.log(0 && "Some string");
-
-// // Short-circuit for || logical operator
-// // The inverse of the logical short circuit && operator.
-// console.log(true || "Some string");
-// console.log(false || "Some string");
-
-// // More example
-// console.log(book.translations.spanish);
-// const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
-// spanishTranslation;
-
-// // console.log(book.reviews.librarything.reviewsCount);
-// // const countWrong = book.reviews.librarything.reviewsCount || "no data";
-// // countWrong;
-
-// // Nullish Coalescing Operator
-// // const count = book.reviews.librarything.reviewsCount ?? "no data";
-// // count;
-
-// // Optional Chaining Operator
-// function getTotalReviewCount(book) {
-//   const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
-//   const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
-//   console.log(librarything);
-
-//   return goodreads + librarything;
-// }
-// console.log(getTotalReviewCount(book));
+  return goodreads + librarything;
+}
+console.log(getTotalReviewCount(book));
 
 // Map
 const books = getBooks();
@@ -307,3 +307,18 @@ const booksAfterUpdate = booksAfterAdd.map((book) =>
 );
 
 booksAfterUpdate;
+
+// Asynchronous Javascript with Promises
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+
+// Asynchronous Javascript with Await & Async
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const data = await res.json();
+  console.log(data);
+}
+
+getTodos();
+console.log("Test");
