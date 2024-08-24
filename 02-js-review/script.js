@@ -285,3 +285,25 @@ const sortedBooksFromLongPages = books
   .slice()
   .sort((a, b) => b.pages - a.pages);
 sortedBooksFromLongPages;
+
+// Working with immutable arrays
+// 1. Add element to array
+const newBook = {
+  id: 6,
+  title: "Harry Poter dan Sahabatnya, si Kambing Perkasa",
+  author: "Lala Movie",
+};
+
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+// 2. Remove element from array
+const booksAfterRemove = booksAfterAdd.filter((book) => book.id !== 5);
+booksAfterRemove;
+
+// 3. Update element in array
+const booksAfterUpdate = booksAfterAdd.map((book) =>
+  book.id === 6 ? { ...book, title: "Test" } : book
+);
+
+booksAfterUpdate;
