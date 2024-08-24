@@ -264,3 +264,24 @@ const adventureBooks = books.filter((book) =>
   book.genres.includes("adventure")
 );
 adventureBooks;
+
+// Reduce
+const pagesAllBooks = books.reduce(
+  (previousValue, book) => previousValue + book.pages,
+  0
+);
+
+pagesAllBooks;
+
+// Sort
+const x = [3, 1, 15, 41, 7, 2];
+const ascendingSorted = x.slice().sort((a, b) => a - b);
+const decesndingSorted = x.slice().sort((a, b) => b - a);
+x;
+ascendingSorted;
+decesndingSorted;
+
+const sortedBooksFromLongPages = books
+  .slice()
+  .sort((a, b) => b.pages - a.pages);
+sortedBooksFromLongPages;
